@@ -5,10 +5,11 @@
   ],
   "id": "m_3009743_sw_14_1_20160928_20161129",
   "collection": "NAIP_MOSAIC",
+  "bbox": [-97.75, 30.25, -97.6875, 30.312499999999996],
   "type": "Feature",
   "geometry": {
-    "type": "MultiPolygon",
-    "coordinates": [
+    "type": "Polygon",
+    "coordinates":
       [
         [
           [
@@ -33,7 +34,6 @@
           ]
         ]
       ]
-    ]
   },
   "properties": {
     "datetime": "2016-09-28T00:00:00+00:00",
@@ -124,5 +124,17 @@
       "storage:tier_duration": 0,
       "storage:first_byte_latency": "milliseconds"
     }
-  }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
 }
