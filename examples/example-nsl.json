@@ -2,7 +2,7 @@
   "stac_version": "1.0.0-beta.2",
   "stac_extensions": [
     "view",
-    "storage"
+    "https://stac-extensions.github.io/sar/v1.0.0/schema.json"
   ],
   "id": "20190822T183518Z_746_POM1_ST2_P",
   "collection": "NSL_SCENE",
