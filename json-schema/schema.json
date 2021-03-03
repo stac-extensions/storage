@@ -1,138 +1,105 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/template/v1.0.0/schema.json#",
-  "title": "Template Extension",
-  "description": "STAC Template Extension for STAC Items and STAC Collections.",
-  "oneOf": [
-    {
-      "$comment": "This is the schema for STAC Items.",
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "type",
-            "properties",
-            "assets"
-          ],
-          "properties": {
-            "type": {
-              "const": "Feature"
-            },
-            "properties": {
-              "allOf": [
-                {
-                  "$comment": "Require fields here for item properties.",
-                  "required": [
-                    "template:new_field"
-                  ]
-                },
-                {
-                  "$ref": "#/definitions/fields"
-                }
-              ]
-            },
-            "assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
-            }
-          }
-        },
-        {
-          "$ref": "#/definitions/stac_extensions"
-        }
-      ]
-    },
-    {
-      "$comment": "This is the schema for STAC Collections.",
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "type"
-          ],
-          "properties": {
-            "type": {
-              "const": "Collection"
-            },
-            "assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
-            },
-            "item_assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
-            }
-          }
-        },
-        {
-          "$ref": "#/definitions/stac_extensions"
-        },
-        {
-          "$ref": "#/definitions/fields"
-        }
-      ]
-    }
-  ],
+  "$id": "https://schemas.stacspec.org/v1.0.0-beta.2/extensions/view/json-schema/schema.json#",
+  "title": "Storage Object Extension",
+  "description": "STAC Storage Object Extension to a STAC Item and STAC Assets.",
   "definitions": {
-    "stac_extensions": {
+    "storage": {
       "type": "object",
       "required": [
-        "stac_extensions"
+        "stac_extensions",
+        "properties",
+        "assets"
       ],
       "properties": {
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+            "enum": [
+              "storage",
+              "https://schemas.stacspec.org/v1.0.0-beta.2/extensions/view/json-schema/schema.json"
+            ]
+          }
+        },
+        "properties": {
+          "type": "object",
+          "required": [
+            "storage:platform",
+            "storage:region",
+            "storage:requester_pays"
+          ],
+          "properties": {
+            "storage:platform": {
+              "title": "Platform",
+              "type": "string",
+              "enum": [
+                "UNKNOWN_CLOUD_PLATFORM",
+                "AWS",
+                "GCP",
+                "AZURE",
+                "IBM",
+                "ALIBABA",
+                "ORACLE"
+              ],
+              "default": "UNKNOWN_CLOUD_PLATFORM"
+            },
+            "storage:manager": {
+              "title": "Manager",
+              "type": "string"
+            },
+            "storage:region": {
+              "title": "Region",
+              "type": "string"
+            },
+            "storage:bucket": {
+              "title": "Bucket",
+              "type": "string"
+            },
+            "storage:object_path": {
+              "title": "Object Path",
+              "type": "string"
+            },
+            "storage:requester_pays": {
+              "type": "boolean",
+              "title": "Requester pays",
+              "default": true
+            },
+            "storage:tier": {
+              "title": "Tier",
+              "type": "string"
+            },
+            "storage:tier_duration": {
+              "title": "Tier Duration",
+              "type": "integer",
+              "default": 0
+            },
+            "storage:first_byte_latency": {
+              "title": "Tier",
+              "type": "string"
+            },
+            "storage:date_stored": {
+              "title": "Date Stored",
+              "type": "string",
+              "format": "date-time"
+            },
+            "storage:min_tier_duration": {
+              "title": "Minimum Duration for Tier",
+              "type": "integer",
+              "default": 0
+            },
+            "storage:max_tier_duration": {
+              "title": "Maxiumum Duration for Tier",
+              "type": "integer",
+              "default": 0
+            },
+            "storage:archived": {
+              "title": "Archived",
+              "type": "boolean",
+              "default": false
+            }
           }
         }
       }
-    },
-    "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
-      "type": "object",
-      "properties": {
-        "template:new_field": {
-          "type": "string"
-        },
-        "template:xyz": {
-          "type": "object",
-          "required": [
-            "x",
-            "y",
-            "z"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        }, 
-        "template:another_one": {
-          "type": "array", 
-          "items": {
-            "type": "number"
-          }
-        }
-      },
-      "patternProperties": {
-        "^(?!template:)": {
-          "$comment": "Above, change `template` to the prefix of this extension",
-        }
-      },
-      "additionalProperties": false
     }
   }
 }
