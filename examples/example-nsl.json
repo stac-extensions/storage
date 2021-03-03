@@ -7,10 +7,10 @@
   "id": "20190822T183518Z_746_POM1_ST2_P",
   "collection": "NSL_SCENE",
   "type": "Feature",
+  "bbox": [-97.7466867683867, 30.278398961994966, -97.72990596574927, 30.288621181865743],
   "geometry": {
-    "type": "MultiPolygon",
+    "type": "Polygon",
     "coordinates": [
-      [
         [
           [
             -97.7466867683867,
@@ -34,7 +34,6 @@
           ]
         ]
       ]
-    ]
   },
   "properties": {
     "datetime": "2019-08-22T18:35:18+00:00",
@@ -101,5 +100,17 @@
       "storage:tier_duration": 0,
       "storage:first_byte_latency": "hours"
     }
-  }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
 }
