@@ -7,7 +7,9 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @davidraleigh
 
-This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.  This extension adds fields to STAC Item and Asset objects, allowing for details related to cloud storage access and costs to be associated with a STAC Item.  This extension does not cover NFS solutions provided by PaaS cloud companies.
+This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
+This extension adds fields to STAC Item and Asset objects, allowing for details related to cloud storage access and costs to be associated
+with a STAC Item.  This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
   - [Item example 1](examples/example-naip.json): Shows the basic usage of the extension in a STAC Item.
