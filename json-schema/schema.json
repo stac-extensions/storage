@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://stac-extensions.github.io/storage/v1.0.0/schema.json",
-  "title": "Storage Object Extension",
+  "title": "Storage Extension",
   "description": "STAC Storage Object Extension to a STAC Item and STAC Assets.",
   "definitions": {
     "storage": {
