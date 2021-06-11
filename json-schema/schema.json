@@ -109,10 +109,6 @@
           ],
           "default": "OTHER"
         },
-        "storage:manager": {
-          "title": "Manager",
-          "type": "string"
-        },
         "storage:region": {
           "title": "Region",
           "type": "string"
