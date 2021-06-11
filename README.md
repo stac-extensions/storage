@@ -12,8 +12,8 @@ This extension adds fields to STAC Item and Asset objects, allowing for details 
 with a STAC Item.  This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
-  - [Item example 1](examples/example-naip.json): Shows the basic usage of the extension in a STAC Item.
-  - [Item example 2](examples/example-nsl.json): Another example of basic usage.
+  - [Item example 1](examples/item-naip.json): Shows the basic usage of the extension in a STAC Item.
+  - [Item example 2](examples/item-nsl.json): Another example of basic usage.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
