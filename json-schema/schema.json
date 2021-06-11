@@ -73,11 +73,6 @@
               "title": "Tier",
               "type": "string"
             },
-            "storage:date_stored": {
-              "title": "Date Stored",
-              "type": "string",
-              "format": "date-time"
-            },
             "storage:min_tier_duration": {
               "title": "Minimum Duration for Tier",
               "type": "integer",
