@@ -3,13 +3,85 @@
   "$id": "https://stac-extensions.github.io/storage/v1.0.0/schema.json",
   "title": "Storage Extension",
   "description": "STAC Storage Extension to a STAC Item and STAC Assets.",
+  "oneOf": [
+    {
+      "$comment": "This is the schema for STAC Items.",
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "properties",
+            "assets"
+          ],
+          "properties": {
+            "type": {
+              "const": "Feature"
+            },
+            "properties": {
+              "allOf": [
+                {
+                  "$comment": "Require fields here for item properties.",
+                  "required": [
+                    "storage:platform",
+                    "storage:region"
+                  ]
+                },
+                {
+                  "$ref": "#/definitions/fields"
+                }
+              ]
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/stac_extensions"
+        }
+      ]
+    },
+    {
+      "$comment": "This is the schema for STAC Collections",
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "Collection"
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
+            },
+            "item_assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/stac_extensions"
+        }
+      ]
+    }
+  ],  
   "definitions": {
-    "storage": {
+    "stac_extensions": {
       "type": "object",
       "required": [
-        "stac_extensions",
-        "properties",
-        "assets"
+        "stac_extensions"
       ],
       "properties": {
         "stac_extensions": {
@@ -17,78 +89,74 @@
           "contains": {
             "const": "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
           }
-        },
-        "properties": {
-          "type": "object",
-          "required": [
-            "storage:platform",
-            "storage:region"
+        }
+      }
+    },
+    "fields": {
+      "type": "object",
+      "properties": {
+        "storage:platform": {
+          "title": "Platform",
+          "type": "string",
+          "enum": [
+            "OTHER",
+            "AWS",
+            "GCP",
+            "AZURE",
+            "IBM",
+            "ALIBABA",
+            "ORACLE"
           ],
-          "properties": {
-            "storage:platform": {
-              "title": "Platform",
-              "type": "string",
-              "enum": [
-                "UNKNOWN_CLOUD_PLATFORM",
-                "AWS",
-                "GCP",
-                "AZURE",
-                "IBM",
-                "ALIBABA",
-                "ORACLE"
-              ],
-              "default": "UNKNOWN_CLOUD_PLATFORM"
-            },
-            "storage:manager": {
-              "title": "Manager",
-              "type": "string"
-            },
-            "storage:region": {
-              "title": "Region",
-              "type": "string"
-            },
-            "storage:bucket": {
-              "title": "Bucket",
-              "type": "string"
-            },
-            "storage:object_path": {
-              "title": "Object Path",
-              "type": "string"
-            },
-            "storage:requester_pays": {
-              "type": "boolean",
-              "title": "Requester pays",
-              "default": false
-            },
-            "storage:tier": {
-              "title": "Tier",
-              "type": "string"
-            },
-            "storage:tier_duration": {
-              "title": "Tier Duration",
-              "type": "integer",
-              "default": 0
-            },
-            "storage:first_byte_latency": {
-              "title": "Tier",
-              "type": "string"
-            },
-            "storage:min_tier_duration": {
-              "title": "Minimum Duration for Tier",
-              "type": "integer",
-              "default": 0
-            },
-            "storage:max_tier_duration": {
-              "title": "Maxiumum Duration for Tier",
-              "type": "integer",
-              "default": 0
-            },
-            "storage:archived": {
-              "title": "Archived",
-              "type": "boolean",
-              "default": false
-            }
-          }
+          "default": "OTHER"
+        },
+        "storage:manager": {
+          "title": "Manager",
+          "type": "string"
+        },
+        "storage:region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "storage:bucket": {
+          "title": "Bucket",
+          "type": "string"
+        },
+        "storage:object_path": {
+          "title": "Object Path",
+          "type": "string"
+        },
+        "storage:requester_pays": {
+          "type": "boolean",
+          "title": "Requester pays",
+          "default": false
+        },
+        "storage:tier": {
+          "title": "Tier",
+          "type": "string"
+        },
+        "storage:tier_duration": {
+          "title": "Tier Duration",
+          "type": "integer",
+          "default": 0
+        },
+        "storage:first_byte_latency": {
+          "title": "Tier",
+          "type": "string"
+        },
+        "storage:min_tier_duration": {
+          "title": "Minimum Duration for Tier",
+          "type": "integer",
+          "default": 0
+        },
+        "storage:max_tier_duration": {
+          "title": "Maxiumum Duration for Tier",
+          "type": "integer",
+          "default": 0
+        },
+        "storage:archived": {
+          "title": "Archived",
+          "type": "boolean",
+          "default": false
         }
       }
     }
