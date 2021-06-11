@@ -33,7 +33,7 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 | storage:region                | string    | (REQUIRED) The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
 | storage:bucket                | string    | The bucket for the asset, used along with object path |
 | storage:object_path           | string    | The object_path for the asset, used along with bucket |
-| storage:requester_pays        | bool      | (REQUIRED) Is the data requester pays or is it data manager/cloud provider pays |
+| storage:requester_pays        | bool      | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
 | storage:tier                  | string    | The title for the tier type (as defined by PaaS provider) |
 | storage:tier_duration         | integer   | Minimum storage duration (in days) required before additional fees |
 | storage:date_stored           | string    | Date and time the corresponding asset placed into the current storage tier (relevant for tier_duration > 0). Format is RFC 3339. |

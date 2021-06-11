@@ -22,8 +22,7 @@
           "type": "object",
           "required": [
             "storage:platform",
-            "storage:region",
-            "storage:requester_pays"
+            "storage:region"
           ],
           "properties": {
             "storage:platform": {
@@ -59,7 +58,7 @@
             "storage:requester_pays": {
               "type": "boolean",
               "title": "Requester pays",
-              "default": true
+              "default": false
             },
             "storage:tier": {
               "title": "Tier",
