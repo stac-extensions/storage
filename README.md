@@ -5,7 +5,7 @@
 - **Field Name Prefix:** storage
 - **Scope:** Item, Asset
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @davidraleigh
+- **Owner**: @davidraleigh @matthewhanson
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 This extension adds fields to STAC Item and Asset objects, allowing for details related to cloud storage access and costs to be associated
@@ -18,25 +18,23 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 - [Changelog](./CHANGELOG.md)
 
 ## Item Fields
+
 | Field Name  | Type   | Description |
 | ----------- | ------ | ----------- |
 | storage:min_tier_duration   | integer  | number of days for the shortest time tier restriction on access of an asset. |
 | storage:max_tier_duration   | integer  | number of days for the longest time tier restrictions on access of an asset. |
 | storage:archived            | bool    | descriptor for whether the data is "properly" archived according to implementers discretion |
-
-## Asset Fields
-
-| Field Name  | Type   | Description |
-| ----------- | ------ | ----------- |
 | storage:platform              | string    | (REQUIRED) The [cloud provider](#providers) where data is stored |
 | storage:manager               | string    | The entity in charge of managing the data. |
 | storage:region                | string    | (REQUIRED) The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| storage:bucket                | string    | The bucket for the asset, used along with object path |
+| storage:bucket                | string    | The bucket for the asset(s), used along with object path |
 | storage:object_path           | string    | The object_path for the asset, used along with bucket |
 | storage:requester_pays        | bool      | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
 | storage:tier                  | string    | The title for the tier type (as defined by PaaS provider) |
 | storage:tier_duration         | integer   | Minimum storage duration (in days) required before additional fees |
 | storage:first_byte_latency    | string    | approximate time unit (milliseconds, minutes or hours) for accessing first byte of data |
+
+While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
 
 ### Additional Field Information
 
