@@ -34,7 +34,8 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 | storage:tier_duration         | integer   | Minimum storage duration (in days) required before additional fees |
 | storage:first_byte_latency    | string    | approximate time unit (milliseconds, minutes or hours) for accessing first byte of data |
 
-While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
+While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally
+to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
 
 ### Additional Field Information
 
