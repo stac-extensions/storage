@@ -1,5 +1,5 @@
 {
-  "stac_version": "1.0.0-beta.2",
+  "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
   ],
@@ -55,7 +55,6 @@
       "storage:bucket": "naip-nsl",
       "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
-      "storage:manager": "Near Space Labs",
       "storage:region": "westus2",
       "storage:tier": "Archive tier",
       "storage:tier_duration": 180,
@@ -68,7 +67,6 @@
       "storage:bucket": "naip-data",
       "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "GCP",
-      "storage:manager": "Near Space Labs",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
       "storage:tier": "COLDLINE",
@@ -82,7 +80,6 @@
       "storage:bucket": "naip-visualization",
       "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AWS",
-      "storage:manager": "ESRI",
       "storage:region": "us-west-2",
       "storage:requester_pays": true,
       "storage:tier": "standard",
@@ -95,7 +92,6 @@
       "storage:bucket": "naipeuwest",
       "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
-      "storage:manager": "AZURE",
       "storage:region": "westeurope",
       "storage:requester_pays": false,
       "storage:tier": "hot tier",
@@ -108,7 +104,6 @@
       "storage:bucket": "naipblobs",
       "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
-      "storage:manager": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
       "storage:tier": "hot tier",
@@ -121,7 +116,6 @@
       "storage:bucket": "naipblobs",
       "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.200.jpg",
       "storage:platform": "AZURE",
-      "storage:manager": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
       "storage:tier": "hot tier",
@@ -131,14 +125,8 @@
   },
   "links": [
     {
-      "rel": "root",
-      "href": "../../catalog.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "parent",
-      "href": "../collection.json",
-      "type": "application/json"
+      "href": "https://example.com/examples/item.json",
+      "rel": "self"
     }
   ]
 }

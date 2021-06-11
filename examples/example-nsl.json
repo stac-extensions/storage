@@ -1,5 +1,5 @@
 {
-  "stac_version": "1.0.0-beta.2",
+  "stac_version": "1.0.0",
   "stac_extensions": [
     "view",
     "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
@@ -58,7 +58,6 @@
       "storage:bucket": "swiftera-processed-data",
       "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "storage:platform": "GCP",
-      "storage:manager": "Near Space Labs",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
       "storage:tier": "Standard",
@@ -71,7 +70,6 @@
       "storage:bucket": "swiftera-processed-data",
       "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "storage:platform": "GCP",
-      "storage:manager": "Near Space Labs",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
       "storage:tier": "Standard",
@@ -84,7 +82,6 @@
       "storage:bucket": "nsl-data-archive",
       "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "storage:platform": "AWS",
-      "storage:manager": "Near Space Labs",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
       "storage:tier": "Glacier",
@@ -98,7 +95,6 @@
       "storage:bucket": "nsl-data-archive",
       "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "storage:platform": "AWS",
-      "storage:manager": "Near Space Labs",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
       "storage:tier": "Standard",
@@ -108,14 +104,8 @@
   },
   "links": [
     {
-      "rel": "root",
-      "href": "../../catalog.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "parent",
-      "href": "../collection.json",
-      "type": "application/json"
+      "href": "https://example.com/examples/item.json",
+      "rel": "self"
     }
   ]
 }
