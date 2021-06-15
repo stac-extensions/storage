@@ -24,8 +24,8 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 | storage:min_tier_duration   | integer  | number of days for the shortest time tier restriction on access of an asset. |
 | storage:max_tier_duration   | integer  | number of days for the longest time tier restrictions on access of an asset. |
 | storage:archived            | bool    | descriptor for whether the data is "properly" archived according to implementers discretion |
-| storage:platform              | string    | (REQUIRED) The [cloud provider](#providers) where data is stored |
-| storage:region                | string    | (REQUIRED) The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
+| storage:platform              | string    | The [cloud provider](#providers) where data is stored |
+| storage:region                | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
 | storage:bucket                | string    | The bucket for the asset(s), used along with object path |
 | storage:object_path           | string    | The object_path for the asset, used along with bucket |
 | storage:requester_pays        | bool      | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |

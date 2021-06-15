@@ -22,10 +22,7 @@
               "allOf": [
                 {
                   "$comment": "Require fields here for item properties.",
-                  "required": [
-                    "storage:platform",
-                    "storage:region"
-                  ]
+                  "required": []
                 },
                 {
                   "$ref": "#/definitions/fields"
