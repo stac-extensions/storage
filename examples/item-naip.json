@@ -127,6 +127,10 @@
     {
       "href": "https://example.com/examples/item.json",
       "rel": "self"
+    },
+    {
+      "href": "https://example.com/examples/item.json",
+      "rel": "collection"
     }
   ]
 }
