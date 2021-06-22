@@ -110,14 +110,6 @@
           "title": "Region",
           "type": "string"
         },
-        "storage:bucket": {
-          "title": "Bucket",
-          "type": "string"
-        },
-        "storage:object_path": {
-          "title": "Object Path",
-          "type": "string"
-        },
         "storage:requester_pays": {
           "type": "boolean",
           "title": "Requester pays",
@@ -125,10 +117,6 @@
         },
         "storage:tier": {
           "title": "Tier",
-          "type": "string"
-        },
-        "storage:first_byte_latency": {
-          "title": "First Byte Latency",
           "type": "string"
         }
       }

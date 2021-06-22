@@ -43,84 +43,55 @@
     "datetime": "2016-09-28T00:00:00+00:00",
     "mission": "NAIP",
     "platform": "UNKNOWN_PLATFORM",
-    "gsd": 1,
-    "storage:min_tier_duration": 0,
-    "storage:max_tier_duration": 180,
-    "storage:archived": true
+    "gsd": 1
   },
   "assets": {
     "GEOTIFF_AZURE_RGBIR": {
       "href": "https://naip-nsl.blob.core.windows.net/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/vnd.stac.geotiff",
-      "storage:bucket": "naip-nsl",
-      "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
       "storage:region": "westus2",
-      "storage:tier": "Archive tier",
-      "storage:tier_duration": 180,
-      "storage:date_stored": "2021-01-02T00:00:00+00:00",
-      "storage:first_byte_latency": "hours"
+      "storage:tier": "Archive tier"
     },
     "CO_GEOTIFF_GCP_RGB": {
-      "href": "https://storage.googleapis.com/naip-data/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
+      "href": "gs://naip-data/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/vnd.stac.geotiff; cloud-optimized=true",
-      "storage:bucket": "naip-data",
-      "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "GCP",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
-      "storage:tier": "COLDLINE",
-      "storage:tier_duration": 90,
-      "storage:date_stored": "2021-02-02T00:00:00+00:00",
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "COLDLINE"
     },
     "CO_GEOTIFF_AWS_RGB": {
-      "href": "https://naip-visualization.s3.amazonaws.com/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
+      "href": "s3://naip-visualization/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/vnd.stac.geotiff; cloud-optimized=true",
-      "storage:bucket": "naip-visualization",
-      "storage:object_path": "tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AWS",
       "storage:region": "us-west-2",
       "storage:requester_pays": true,
-      "storage:tier": "standard",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "standard"
     },
     "CO_GEOTIFF_AZURE_RGB": {
       "href": "https://naipeuwest.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/vnd.stac.geotiff; cloud-optimized=true",
-      "storage:bucket": "naipeuwest",
-      "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
       "storage:region": "westeurope",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "hot tier"
     },
     "CO_GEOTIFF_AZURE_RGB_DEPRECATED": {
       "href": "https://naipblobs.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/vnd.stac.geotiff; cloud-optimized=true",
-      "storage:bucket": "naipblobs",
-      "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
       "storage:platform": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "hot tier"
     },
     "THUMBNAIL_AZURE_DEPRECATED": {
       "href": "https://naipblobs.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.200.jpg",
       "type": "image/jpeg",
-      "storage:bucket": "naipblobs",
-      "storage:object_path": "naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.200.jpg",
       "storage:platform": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "hot tier"
     }
   },
   "links": [

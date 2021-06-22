@@ -23,11 +23,8 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 | ----------- | ------ | ----------- |
 | storage:platform              | string    | The [cloud provider](#providers) where data is stored |
 | storage:region                | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| storage:bucket                | string    | The bucket for the asset(s), used along with object path |
-| storage:object_path           | string    | The object_path for the asset, used along with bucket |
 | storage:requester_pays        | bool      | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
 | storage:tier                  | string    | The title for the tier type (as defined by PaaS provider) |
-| storage:first_byte_latency    | string    | approximate time unit (milliseconds, minutes or hours) for accessing first byte of data |
 
 While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally
 to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.

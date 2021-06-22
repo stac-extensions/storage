@@ -44,60 +44,40 @@
     "mission": "SWIFT",
     "platform": "SWIFT_2",
     "instrument": "POM_1",
-    "gsd": 0.20000000298023224,
-    "storage:min_tier_duration": 0,
-    "storage:max_tier_duration": 90,
-    "storage:archived": true
+    "gsd": 0.20000000298023224
   },
   "assets": {
     "GEOTIFF_RGB_GCP": {
-      "href": "https://api.nearspacelabs.net/download/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
+      "href": "gs://swiftera-processed-data/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "type": "image/vnd.stac.geotiff",
-      "storage:bucket": "swiftera-processed-data",
-      "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "storage:platform": "GCP",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
-      "storage:tier": "Standard",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "Standard"
     },
     "THUMBNAIL_RGB_GCP": {
-      "href": "https://api.nearspacelabs.net/download/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
+      "href": "gs://swiftera-processed-data/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "type": "image/png",
-      "storage:bucket": "swiftera-processed-data",
-      "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "storage:platform": "GCP",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
-      "storage:tier": "Standard",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "Standard"
     },
     "GEOTIFF_RGB_AWS": {
-      "href": "https://aws.api.nearspacelabs.net/download/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
+      "href": "s3://nsl-data-archive/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "type": "image/vnd.stac.geotiff",
-      "storage:bucket": "nsl-data-archive",
-      "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",
       "storage:platform": "AWS",
-      "storage:region": "us-central1",
+      "storage:region": "us-central-1",
       "storage:requester_pays": true,
-      "storage:tier": "Glacier",
-      "storage:date_stored": "2021-02-02T00:00:00+00:00",
-      "storage:tier_duration": 90,
-      "storage:first_byte_latency": "milliseconds"
+      "storage:tier": "Glacier"
     },
     "THUMBNAIL_RGB_AWS": {
-      "href": "https://aws.api.nearspacelabs.net/download/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
+      "href": "s3://nsl-data-archive/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "type": "image/png",
-      "storage:bucket": "nsl-data-archive",
-      "storage:object_path": "20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
       "storage:platform": "AWS",
-      "storage:region": "us-central1",
+      "storage:region": "us-central-1",
       "storage:requester_pays": true,
-      "storage:tier": "Standard",
-      "storage:tier_duration": 0,
-      "storage:first_byte_latency": "hours"
+      "storage:tier": "Standard"
     }
   },
   "links": [
