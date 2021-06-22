@@ -51,7 +51,7 @@
       "type": "image/vnd.stac.geotiff",
       "storage:platform": "AZURE",
       "storage:region": "westus2",
-      "storage:tier": "Archive tier"
+      "storage:tier": "archive"
     },
     "CO_GEOTIFF_GCP_RGB": {
       "href": "gs://naip-data/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
@@ -67,7 +67,7 @@
       "storage:platform": "AWS",
       "storage:region": "us-west-2",
       "storage:requester_pays": true,
-      "storage:tier": "standard"
+      "storage:tier": "Standard"
     },
     "CO_GEOTIFF_AZURE_RGB": {
       "href": "https://naipeuwest.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
@@ -75,7 +75,7 @@
       "storage:platform": "AZURE",
       "storage:region": "westeurope",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier"
+      "storage:tier": "hot"
     },
     "CO_GEOTIFF_AZURE_RGB_DEPRECATED": {
       "href": "https://naipblobs.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.tif",
@@ -83,7 +83,7 @@
       "storage:platform": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier"
+      "storage:tier": "hot"
     },
     "THUMBNAIL_AZURE_DEPRECATED": {
       "href": "https://naipblobs.blob.core.windows.net/naip/v002/tx/2016/tx_100cm_2016/30097/m_3009743_sw_14_1_20160928.200.jpg",
@@ -91,7 +91,7 @@
       "storage:platform": "AZURE",
       "storage:region": "eastus",
       "storage:requester_pays": false,
-      "storage:tier": "hot tier"
+      "storage:tier": "hot"
     }
   },
   "links": [

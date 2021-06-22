@@ -53,7 +53,7 @@
       "storage:platform": "GCP",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
-      "storage:tier": "Standard"
+      "storage:tier": "STANDARD"
     },
     "THUMBNAIL_RGB_GCP": {
       "href": "gs://swiftera-processed-data/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.png",
@@ -61,7 +61,7 @@
       "storage:platform": "GCP",
       "storage:region": "us-central1",
       "storage:requester_pays": true,
-      "storage:tier": "Standard"
+      "storage:tier": "STANDARD"
     },
     "GEOTIFF_RGB_AWS": {
       "href": "s3://nsl-data-archive/20190822T162258Z_TRAVIS_COUNTY/Published/REGION_0/20190822T183518Z_746_POM1_ST2_P.tif",

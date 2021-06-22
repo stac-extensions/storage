@@ -43,32 +43,16 @@ Currently this document is arranged to support object storage users of the follo
 
 #### Cloud Provider Storage Tiers
 
-| Duration      | Google Cloud  | AWS                   | Azure         | IBM           | Oracle    | Alibaba           |
-| ------------- | ------------- | --------------------- | ------------- |-------------  | --------- | ---------         |
-| 0 days        | STANDARD      | Standard              | Hot Tier      | Standard      | Standard  | Standard          |
-| 30 days       | NEARLINE      | Standard-IA           | Cool Tier     | Vault         | N/A       | Infrequent Access |
-| 60 days       | N/A           | N/A                   | N/A           | N/A           | N/A       | Archive           |
-| 90 days       | COLDLINE      | Glacier               | N/A           | Cold Vault    | Archive   | N/A |
-| 180 days      | N/A           | Glacier Deep Archive  | Archive Tier  | N/A           | N/A       | Cold Archive |
-| 365 days      | ARCHIVE       | N/A                   | N/A           | N/A           | N/A       | N/A |
+| Minimum Duration | [Google Cloud](https://cloud.google.com/storage/docs/storage-classes) | [AWS](https://aws.amazon.com/s3/storage-classes/) | [Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers)      | [IBM](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba](https://www.alibabacloud.com/product/oss/pricing) |
+| ------------- | --------- | ------------------------ | ------- |----------  | ----------------- | ----------------- |
+| 0 (Auto-Tier) |           | Intelligent-Tiering      |         | Smart Tier |
+| 0 days        | STANDARD  | Standard                 | hot     | Standard   | Standard          | Standard          |
+| 30 days       | NEARLINE  | Standard-IA, One Zone-IA | cool    | Vault      | Infrequent Access | Infrequent Access |
+| 60 days       |           |                          |         |            |                   | Archive           |
+| 90 days       | COLDLINE  | Glacier                  |         | Cold Vault | Archive           | |
+| 180 days      |           | Glacier Deep Archive     | archive |            |                   | Cold Archive |
+| 365 days      | ARCHIVE   |                          |         |            |                   | |
 
-References for the above table:
-
-IBM: <https://cloud.ibm.com/objectstorage/create#pricing>
-
-Google Cloud: <https://cloud.google.com/storage/docs/storage-classes>
-
-Microsoft: <https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers>
-
-AWS: <https://aws.amazon.com/s3/storage-classes/>
-
-Oracle: 
-- <https://www.oracle.com/cloud/storage/pricing.html>
-- <https://www.oracle.com/cloud/storage/archive-storage-faq.html>
-
-Alibaba: 
-- <https://www.alibabacloud.com/product/oss/pricing>
-- <https://www.alibabacloud.com/help/doc-detail/51374.htm>
 
 ## Contributing
 
