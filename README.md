@@ -53,7 +53,6 @@ Currently this document is arranged to support object storage users of the follo
 | 180 days      |           | Glacier Deep Archive     | archive |            |                   | Cold Archive |
 | 365 days      | ARCHIVE   |                          |         |            |                   | |
 
-
 ## Contributing
 
 All contributions are subject to the
