@@ -40,6 +40,7 @@ Currently this document is arranged to support object storage users of the follo
 - Google Cloud Platform: `GCP`
 - IBM Cloud: `IBM`
 - Oracle Cloud: `ORACLE`
+- All other PaaS solutions: `OTHER`
 
 The upper-cased values are meant to be used for `storage:platform`.
 
