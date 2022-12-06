@@ -34,16 +34,19 @@ to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it sho
 #### Providers
 Currently this document is arranged to support object storage users of the following PaaS solutions:
 
-- Alibaba
-- AWS
-- Azure
-- Google Cloud Platform
-- IBM
-- Oracle
+- Alibaba Cloud (Aliyun): `ALIBABA`
+- Amazon AWS: `AWS`
+- Microsoft Azure: `AZURE`
+- Google Cloud Platform: `GCP`
+- IBM Cloud: `IBM`
+- Oracle Cloud: `ORACLE`
+- All other PaaS solutions: `OTHER`
+
+The upper-cased values are meant to be used for `storage:platform`.
 
 #### Cloud Provider Storage Tiers
 
-| Minimum Duration | [Google Cloud](https://cloud.google.com/storage/docs/storage-classes) | [AWS](https://aws.amazon.com/s3/storage-classes/) | [Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers)      | [IBM](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba](https://www.alibabacloud.com/product/oss/pricing) |
+| Minimum Duration | [Google Cloud Platform](https://cloud.google.com/storage/docs/storage-classes) | [Amazon AWS](https://aws.amazon.com/s3/storage-classes/) | [Microsoft Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers) | [IBM Cloud](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle Cloud](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba Cloud](https://www.alibabacloud.com/product/oss/pricing) |
 | ------------- | --------- | ------------------------ | ------- |----------  | ----------------- | ----------------- |
 | 0 (Auto-Tier) |           | Intelligent-Tiering      |         | Smart Tier |
 | 0 days        | STANDARD  | Standard                 | hot     | Standard   | Standard          | Standard          |
