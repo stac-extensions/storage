@@ -4,7 +4,7 @@
 - **Identifier:** <https://stac-extensions.github.io/storage/v1.0.0/schema.json>
 - **Field Name Prefix:** storage
 - **Scope:** Item, Asset
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
 - **Owner**: @davidraleigh @matthewhanson
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
