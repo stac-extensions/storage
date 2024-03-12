@@ -3,13 +3,13 @@
 - **Title:** Storage
 - **Identifier:** <https://stac-extensions.github.io/storage/v1.0.0/schema.json>
 - **Field Name Prefix:** storage
-- **Scope:** Item, Asset
+- **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
 - **Owner**: @davidraleigh @matthewhanson
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This extension adds fields to STAC Item and Asset objects, allowing for details related to cloud storage access and costs to be associated
-with a STAC Item.  This extension does not cover NFS solutions provided by PaaS cloud companies.
+It allows adding details related to cloud storage access and costs to be associated with STAC Assets.
+This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
   - [Item example 1](examples/item-naip.json): Shows the basic usage of the extension in a STAC Item.
@@ -17,14 +17,22 @@ with a STAC Item.  This extension does not cover NFS solutions provided by PaaS 
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Fields
+## Fields
 
-| Field Name  | Type   | Description |
-| ----------- | ------ | ----------- |
-| storage:platform              | string    | The [cloud provider](#providers) where data is stored |
-| storage:region                | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| storage:requester_pays        | bool      | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
-| storage:tier                  | string    | The title for the tier type (as defined by PaaS provider) |
+The fields in the table below can be used in these parts of STAC documents:
+
+- [ ] Catalogs
+- [ ] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Links
+
+| Field Name             | Type      | Description |
+| ---------------------- | --------- | ----------- |
+| storage:platform       | string    | The [cloud provider](#providers) where data is stored |
+| storage:region         | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
+| storage:requester_pays | boolean   | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
+| storage:tier           | string    | The title for the tier type (as defined by PaaS provider) |
 
 While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally
 to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
