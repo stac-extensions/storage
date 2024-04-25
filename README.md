@@ -1,19 +1,20 @@
 # Storage Extension Specification
 
 - **Title:** Storage
-- **Identifier:** <https://stac-extensions.github.io/storage/v1.0.0/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/storage/v2.0.0/schema.json>
 - **Field Name Prefix:** storage
-- **Scope:** Item, Collection
+- **Scope:** Item, Catalog, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
 - **Owner**: @davidraleigh @matthewhanson
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-It allows adding details related to cloud storage access and costs to be associated with STAC Assets.
+It allows adding details related to cloud object storage access and costs to be associated with STAC Assets.
 This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
-  - [Item example 1](examples/item-naip.json): Shows the basic usage of the extension in a STAC Item.
-  - [Item example 2](examples/item-nsl.json): Another example of basic usage.
+  - [NAIP Item](examples/item-naip.json): Shows the usage of the extension in combination with the alternate asset extension.
+  - [NSL Item](examples/item-nsl.json): Shows a mixture of storage providers, including custom S3 hosts.
+  - [Catalog with Link](examples/catalog-link.json): Shows the usage of the extension on a link in a STAC Catalog.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -21,26 +22,47 @@ This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 The fields in the table below can be used in these parts of STAC documents:
 
-- [ ] Catalogs
-- [ ] Collections
+- [x] Catalogs
+- [x] Collections
 - [x] Item Properties (incl. Summaries in Collections)
-- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
-| Field Name             | Type      | Description |
-| ---------------------- | --------- | ----------- |
-| storage:platform       | string    | The [cloud provider](#providers) where data is stored |
-| storage:region         | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| storage:requester_pays | boolean   | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
-| storage:tier           | string    | The title for the tier type (as defined by PaaS provider) |
+| Field Name        | Type                                                         | Description |
+| ----------------- | ------------------------------------------------------------ | ----------- |
+| `storage:schemes` | Map<string, [Storage Scheme Object](#storage-scheme-object)> | **REQUIRED.** A property that contains all of the storage schemes used by Assets and Links in the STAC Item, Catalog or Collection. |
 
-While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally
-to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
+---
 
-### Additional Field Information
+The fields in the table below can be used in these parts of STAC documents:
 
-#### Providers
-Currently this document is arranged to support object storage users of the following PaaS solutions:
+- [ ] Catalogs
+- [ ] Collections
+- [ ] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [x] Links
+- [x] [Alternate Assets Object](https://github.com/stac-extensions/alternate-assets?tab=readme-ov-file#alternate-asset-object)
+
+| Field Name     | Type       | Description |
+| -------------- | ---------- | ----------- |
+| `storage:refs` | \[string\] | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
+
+### Storage Scheme Object
+
+| Field Name     | Type    | Description |
+| -------------- | ------- | ----------- |
+| platform       | string  | **REQUIRED.** The [cloud provider](#platforms) where data is stored. |
+| region         | string  | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
+| requester_pays | boolean | Is the data requester pays or is it data manager/cloud provider pays. Defaults to `false` |
+| tier           | string  | The title for the tier type (as defined by PaaS provider) |
+
+The properties `title` and `description` as defined in Common Metadata can be used as well.
+
+#### Platforms
+
+The `platform` field identifies the cloud provider where the data is stored.
+
+There are a couple of pre-defined values for common providers:
 
 - Alibaba Cloud (Aliyun): `ALIBABA`
 - Amazon AWS: `AWS`
@@ -48,11 +70,17 @@ Currently this document is arranged to support object storage users of the follo
 - Google Cloud Platform: `GCP`
 - IBM Cloud: `IBM`
 - Oracle Cloud: `ORACLE`
-- All other PaaS solutions: `OTHER`
 
-The upper-cased values are meant to be used for `storage:platform`.
+All other PaaS solutions must use a unique URL to the service.
 
-#### Cloud Provider Storage Tiers
+In case an `href` contains a non-HTTP URL that is not directly resolvable,
+the `platform` property must identify the host so that the URL can be resolved without further information.
+This is especially useful to provide the endpoint URL for custom S3 providers.
+In this case the `platform` is effectively the endpoint URL.
+
+#### Tiers
+
+Recommended values for the `tier` field:
 
 | Minimum Duration | [Google Cloud Platform](https://cloud.google.com/storage/docs/storage-classes) | [Amazon AWS](https://aws.amazon.com/s3/storage-classes/) | [Microsoft Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers) | [IBM Cloud](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle Cloud](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba Cloud](https://www.alibabacloud.com/product/oss/pricing) |
 | ------------- | --------- | ------------------------ | ------- |----------  | ----------------- | ----------------- |

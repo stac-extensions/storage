@@ -1,0 +1,33 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
+  ],
+  "type": "Catalog",
+  "id": "20190822T183518Z_746_POM1_ST2_P",
+  "title": "Example Catalog",
+  "description": "An example catalog with a link to documentation on object storage.",
+  "storage:schemes": {
+    "aws": {
+      "platform": "AWS",
+      "region": "us-west-2",
+      "requester_pays": true,
+      "tier": "Standard"
+    }
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/catalog-link.json",
+      "rel": "self"
+    },
+    {
+      "title": "Documentation",
+      "href": "s3://mybucket/project/documentation.pdf",
+      "type": "application/pdf",
+      "rel": "about",
+      "storage:refs": [
+        "aws"
+      ]
+    }
+  ]
+}
