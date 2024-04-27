@@ -1,0 +1,76 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "20190822T183518Z_746_POM1_ST2_P",
+  "title": "Example Collection",
+  "description": "An example catalog with a link to documentation on object storage.",
+  "license": "CC-0",
+  "storage:schemes": {
+    "aws": {
+      "platform": "AWS",
+      "region": "us-west-2",
+      "requester_pays": true,
+      "tier": "Standard"
+    }
+  },
+  "auth:schemes": {
+    "aws": {
+      "type": "s3"
+    }
+  },
+  "assets": {
+    "stac-items": {
+      "title": "STAC Items as GeoParquet",
+      "href": "s3://mybucket/project/items.parquet",
+      "type": "application/vnd.apache.parquet",
+      "storage:refs": [
+        "aws"
+      ],
+      "auth:refs": [
+        "aws"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/catalog-link.json",
+      "rel": "self"
+    },
+    {
+      "title": "Documentation",
+      "href": "s3://mybucket/project/documentation.pdf",
+      "type": "application/pdf",
+      "rel": "about",
+      "storage:refs": [
+        "aws"
+      ],
+      "auth:refs": [
+        "aws"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -56,
+          180,
+          83
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2015-06-23T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  }
+}

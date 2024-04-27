@@ -12,9 +12,12 @@ It allows adding details related to cloud object storage access and costs to be 
 This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
-  - [NAIP Item](examples/item-naip.json): Shows the usage of the extension in combination with the alternate asset extension.
-  - [NSL Item](examples/item-nsl.json): Shows a mixture of storage providers, including custom S3 hosts.
+  - [NAIP Item](examples/item-naip.json): Shows a mixture of storage providers, including custom S3 hosts.
+  - [NSL Item](examples/item-nsl.json): Shows the usage of the extension in combination with the
+    [alternate asset extension](https://github.com/stac-extensions/alternate-assets).
   - [Catalog with Link](examples/catalog-link.json): Shows the usage of the extension on a link in a STAC Catalog.
+  - [Collection with Auth](examples/catalog-link.json): Shows the usage of the extension in a STAC Collecion in combination with the
+    [authentication extension](https://github.com/stac-extensions/authentication).
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
