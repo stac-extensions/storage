@@ -92,7 +92,7 @@
       "href": "s3://naip-visualization/tx/2016/100cm/rgb/30097/m_3009743_sw_14_1_20160928.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "storage:refs": [
-        "gs-std"
+        "aws-std"
       ]
     },
     "GEOTIFF_AZURE_RGBIR": {
