@@ -25,7 +25,9 @@
       "href": "s3://mybucket/project/documentation.pdf",
       "type": "application/pdf",
       "rel": "about",
-      "storage:ref": "aws"
+      "storage:refs": [
+        "aws"
+      ]
     }
   ]
 }

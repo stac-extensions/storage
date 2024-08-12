@@ -28,7 +28,9 @@
       "title": "STAC Items as GeoParquet",
       "href": "s3://mybucket/project/items.parquet",
       "type": "application/vnd.apache.parquet",
-      "storage:ref": "aws",
+      "storage:refs": [
+        "aws"
+      ],
       "auth:refs": [
         "aws"
       ]
@@ -44,7 +46,9 @@
       "href": "s3://mybucket/project/documentation.pdf",
       "type": "application/pdf",
       "rel": "about",
-      "storage:ref": "aws",
+      "storage:refs": [
+        "aws"
+      ],
       "auth:refs": [
         "aws"
       ]

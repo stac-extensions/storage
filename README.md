@@ -45,9 +45,9 @@ The fields in the table below can be used in these parts of STAC documents:
 - [x] Links
 - [x] [Alternate Assets Object](https://github.com/stac-extensions/alternate-assets?tab=readme-ov-file#alternate-asset-object)
 
-| Field Name    | Type    | Description |
-| ------------- | ------- | ----------- |
-| `storage:ref` | string  | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
+| Field Name     | Type    | Description |
+| -------------- | ------- | ----------- |
+| `storage:refs` | string  | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
 
 ### Storage Scheme Object
 

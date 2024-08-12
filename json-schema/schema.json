@@ -129,9 +129,12 @@
     "refs_field": {
       "type": "object",
       "properties": {
-        "storage:ref": {
-          "type": "string",
-          "minLength": 1
+        "storage:refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "patternProperties": {
