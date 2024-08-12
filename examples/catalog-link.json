@@ -9,10 +9,10 @@
   "description": "An example catalog with a link to documentation on object storage.",
   "storage:schemes": {
     "aws": {
-      "platform": "AWS",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "mybucket",
       "region": "us-west-2",
-      "requester_pays": true,
-      "tier": "Standard"
+      "requester_pays": true
     }
   },
   "links": [
@@ -25,9 +25,7 @@
       "href": "s3://mybucket/project/documentation.pdf",
       "type": "application/pdf",
       "rel": "about",
-      "storage:refs": [
-        "aws"
-      ]
+      "storage:ref": "aws"
     }
   ]
 }

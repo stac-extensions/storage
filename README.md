@@ -12,9 +12,8 @@ It allows adding details related to cloud object storage access and costs to be 
 This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
-  - [NAIP Item](examples/item-naip.json): Shows a mixture of storage providers, including custom S3 hosts.
-  - [NSL Item](examples/item-nsl.json): Shows the usage of the extension in combination with the
-    [alternate asset extension](https://github.com/stac-extensions/alternate-assets).
+  - [NAIP Item with Alternate Assets](examples/item-naip.json): Shows a mixture of storage providers, including custom S3 hosts
+    and the [alternate assets extension](https://github.com/stac-extensions/alternate-assets).
   - [Catalog with Link](examples/catalog-link.json): Shows the usage of the extension on a link in a STAC Catalog.
   - [Collection with Auth](examples/catalog-link.json): Shows the usage of the extension in a STAC Collecion in combination with the
     [authentication extension](https://github.com/stac-extensions/authentication).
@@ -46,82 +45,56 @@ The fields in the table below can be used in these parts of STAC documents:
 - [x] Links
 - [x] [Alternate Assets Object](https://github.com/stac-extensions/alternate-assets?tab=readme-ov-file#alternate-asset-object)
 
-| Field Name     | Type       | Description |
-| -------------- | ---------- | ----------- |
-| `storage:refs` | \[string\] | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
+| Field Name    | Type    | Description |
+| ------------- | ------- | ----------- |
+| `storage:ref` | string  | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
 
 ### Storage Scheme Object
 
 | Field Name     | Type    | Description |
 | -------------- | ------- | ----------- |
-| platform       | string  | **REQUIRED.** The [cloud provider](#platforms) where data is stored. |
-| region         | string  | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| requester_pays | boolean | Is the data requester pays or is it data manager/cloud provider pays. Defaults to `false` |
-| tier           | string  | The title for the tier type (as defined by PaaS provider) |
+| platform       | string  | **REQUIRED.** The cloud provider where data is stored as URI or URI template to the API. |
+| region         | string  | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider). |
+| requester_pays | boolean | Is the data "requester pays" (`true`) or is it "data manager/cloud provider pays" (`false`). Defaults to `false`. |
+| ...            | ...     | Additional properties as defined in the URL template or in the platform specific documents. |
 
-The properties `title` and `description` as defined in Common Metadata can be used as well.
+The properties `title` and `description` as defined in Common Metadata should be used as well.
 
-#### Platforms
+#### platform
 
-The `platform` field identifies the cloud provider where the data is stored.
+The `platform` field identifies the cloud provider where the data is stored as URI or URI template to the API of the service.
 
-There are a couple of pre-defined values for common providers:
+If a URI template is provided, all variables must be defined in the Storage Scheme Object as a property with the same name.
+For example, the URI template `https://{bucket}.{region}.example.com` must have at least the properties 
+`bucket` and `region` defined:
 
-- Alibaba Cloud (Aliyun): `ALIBABA`
-- Amazon AWS: `AWS`
-- Microsoft Azure: `AZURE`
-- Google Cloud Platform: `GCP`
-- IBM Cloud: `IBM`
-- Oracle Cloud: `ORACLE`
-
-All other PaaS solutions must use a unique URL to the service.
+```json
+{
+  "platform": "https://{bucket}.{region}.example.com",
+  "region": "eu-fr",
+  "bucket": "john-doe-stac",
+  "requester_pays": true
+}
+```
 
 In case an `href` contains a non-HTTP URL that is not directly resolvable,
 the `platform` property must identify the host so that the URL can be resolved without further information.
-This is especially useful to provide the endpoint URL for custom S3 providers.
-In this case the `platform` is effectively the endpoint URL.
+For example, this is especially useful to provide the endpoint URL for custom S3 providers.
+In this case the `platform` could effectively provide the endpoint URL.
 
-#### Tiers
+We try to collect pre-defined templates and best pratices for as many providers as possible
+in this repository, but be aware that these are not part of the official extension releases
+and are not validated. This extension just provides the framework, the provider best pratices
+may change at any time without a new version of this extension being released.
 
-Recommended values for the `tier` field:
+The following providers have defined best pratices at this point:
 
-| Minimum Duration | [Google Cloud Platform](https://cloud.google.com/storage/docs/storage-classes) | [Amazon AWS](https://aws.amazon.com/s3/storage-classes/) | [Microsoft Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers) | [IBM Cloud](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle Cloud](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba Cloud](https://www.alibabacloud.com/product/oss/pricing) |
-| ------------- | --------- | ------------------------ | ------- |----------  | ----------------- | ----------------- |
-| 0 (Auto-Tier) |           | Intelligent-Tiering      |         | Smart Tier |
-| 0 days        | STANDARD  | Standard                 | hot     | Standard   | Standard          | Standard          |
-| 30 days       | NEARLINE  | Standard-IA, One Zone-IA | cool    | Vault      | Infrequent Access | Infrequent Access |
-| 60 days       |           |                          |         |            |                   | Archive           |
-| 90 days       | COLDLINE  | Glacier                  |         | Cold Vault | Archive           | |
-| 180 days      |           | Glacier Deep Archive     | archive |            |                   | Cold Archive |
-| 365 days      | ARCHIVE   |                          |         |            |                   | |
+- [AWS S3](platforms/aws-s3.md)
+- [Generic S3 (non-AWS)](platforms/s3.md)
+- [Microsoft Azure](platforms/ms-azure.md)
+
+Feel encouraged to submit additional platform specifications via Pull Requests.
 
 ## Contributing
 
-All contributions are subject to the
-[STAC Specification Code of Conduct](https://github.com/radiantearth/stac-spec/blob/master/CODE_OF_CONDUCT.md).
-For contributions, please follow the
-[STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md) Instructions
-for running tests are copied here for convenience.
-
-### Running tests
-
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
-To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
-
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
-your command line run:
-```bash
-npm install
-```
-
-Then to check markdown formatting and test the examples against the JSON schema, you can run:
-```bash
-npm test
-```
-
-This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
-
-If the tests reveal formatting problems with the examples, you can fix them with:
-```bash
-npm run format-examples
-```
+See the [Contributor documentation](CONTRIBUTING.md) for details.

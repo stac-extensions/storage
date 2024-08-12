@@ -16,19 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-## [v2.0.0] - 2021-06-23
+## [v2.0.0] - 2024-08-30
 
 ### Added
 
-- `storage:schemes`, `storage:refs` and Storage Scheme Object
+- `storage:schemes`, `storage:ref` and Storage Scheme Object
 - Support the storage extension in Links
 - Support for the Alternate Assets Extension
 - Support for other storage providers, including custom S3 hosts
 
 ### Changed
 
+- The extension is a framework for storage providers, it doesn't strictly define the individual providers.
 - The storage providers are grouped in `storage:schemes` and located in the Item Properties, Collections or Catalog metadata
-- Assets and Links reference the storage schemes by key in `storage:refs` 
+- Assets and Links reference the storage schemes by key in `storage:ref`
 
 ### Removed
 
