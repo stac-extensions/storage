@@ -31,3 +31,13 @@ If the tests reveal formatting problems with the examples, you can fix them with
 ```bash
 npm run format-examples
 ```
+
+## Adding a new provider
+
+1. Add documentation in a Markdown file to the folder `platforms`
+2. Add the provider to the table in the `README.md`, see chapter "type"
+3. Add a JSON Schema to the folder `json-schema/platforms`
+4. Add the schema to the extension schema in file `json-schema/schema.json` (search for `allOf` below the definition of `storage:schemes`)
+5. Add the newly created schema to the `validator-config.json`
+
+Use the same file names (excluding the extension) for documentation and schema.
