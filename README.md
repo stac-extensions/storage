@@ -1,19 +1,22 @@
 # Storage Extension Specification
 
 - **Title:** Storage
-- **Identifier:** <https://stac-extensions.github.io/storage/v1.0.0/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/storage/v2.0.0/schema.json>
 - **Field Name Prefix:** storage
-- **Scope:** Item, Collection
+- **Scope:** Item, Catalog, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
-- **Owner**: @davidraleigh @matthewhanson
+- **Owner**: @matthewhanson @m-mohr
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-It allows adding details related to cloud storage access and costs to be associated with STAC Assets.
+It allows adding details related to cloud object storage access and costs to be associated with STAC Assets.
 This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 - Examples:
-  - [Item example 1](examples/item-naip.json): Shows the basic usage of the extension in a STAC Item.
-  - [Item example 2](examples/item-nsl.json): Another example of basic usage.
+  - [NAIP Item with Alternate Assets](examples/item-naip.json): Shows a mixture of storage providers, including custom S3 hosts
+    and the [alternate assets extension](https://github.com/stac-extensions/alternate-assets).
+  - [Catalog with Link](examples/catalog-link.json): Shows the usage of the extension on a link in a STAC Catalog.
+  - [Collection with Auth](examples/catalog-link.json): Shows the usage of the extension in a STAC Collecion in combination with the
+    [authentication extension](https://github.com/stac-extensions/authentication).
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -21,76 +24,87 @@ This extension does not cover NFS solutions provided by PaaS cloud companies.
 
 The fields in the table below can be used in these parts of STAC documents:
 
-- [ ] Catalogs
-- [ ] Collections
+- [x] Catalogs
+- [x] Collections
 - [x] Item Properties (incl. Summaries in Collections)
-- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
-| Field Name             | Type      | Description |
-| ---------------------- | --------- | ----------- |
-| storage:platform       | string    | The [cloud provider](#providers) where data is stored |
-| storage:region         | string    | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider) |
-| storage:requester_pays | boolean   | Is the data requester pays or is it data manager/cloud provider pays. *Defaults to false* |
-| storage:tier           | string    | The title for the tier type (as defined by PaaS provider) |
+| Field Name        | Type                                                         | Description |
+| ----------------- | ------------------------------------------------------------ | ----------- |
+| `storage:schemes` | Map<string, [Storage Scheme Object](#storage-scheme-object)> | **REQUIRED.** A property that contains all of the storage schemes used by Assets and Links in the STAC Item, Catalog or Collection. |
 
-While these are all valid properties on an Item, they will typically be defined per-asset. If a field applies equally
-to all assets (e.g., storage:platform=AWS if all assets are on AWS), then it should be specified in Item properties.
+---
 
-### Additional Field Information
+The fields in the table below can be used in these parts of STAC documents:
 
-#### Providers
-Currently this document is arranged to support object storage users of the following PaaS solutions:
+- [ ] Catalogs
+- [ ] Collections
+- [ ] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [x] Links
+- [x] [Alternate Assets Object](https://github.com/stac-extensions/alternate-assets?tab=readme-ov-file#alternate-asset-object)
 
-- Alibaba Cloud (Aliyun): `ALIBABA`
-- Amazon AWS: `AWS`
-- Microsoft Azure: `AZURE`
-- Google Cloud Platform: `GCP`
-- IBM Cloud: `IBM`
-- Oracle Cloud: `ORACLE`
-- All other PaaS solutions: `OTHER`
+| Field Name     | Type       | Description |
+| -------------- | ---------- | ----------- |
+| `storage:refs` | \[string\] | A property that specifies which schemes in `storage:schemes` may be used to access an Asset or Link. Each value must be one of the keys defined in `storage:schemes`. |
 
-The upper-cased values are meant to be used for `storage:platform`.
+### Storage Scheme Object
 
-#### Cloud Provider Storage Tiers
+| Field Name     | Type    | Description |
+| -------------- | ------- | ----------- |
+| type           | string  | **REQUIRED.** Type identifier for the platform, see below. |
+| platform       | string  | **REQUIRED.** The cloud provider where data is stored as URI or URI template to the API. |
+| region         | string  | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider). |
+| requester_pays | boolean | Is the data "requester pays" (`true`) or is it "data manager/cloud provider pays" (`false`). Defaults to `false`. |
+| ...            | ...     | Additional properties as defined in the URL template or in the platform specific documents. |
 
-| Minimum Duration | [Google Cloud Platform](https://cloud.google.com/storage/docs/storage-classes) | [Amazon AWS](https://aws.amazon.com/s3/storage-classes/) | [Microsoft Azure](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers) | [IBM Cloud](https://cloud.ibm.com/objectstorage/create#pricing)  | [Oracle Cloud](https://www.oracle.com/cloud/storage/pricing.html) | [Alibaba Cloud](https://www.alibabacloud.com/product/oss/pricing) |
-| ------------- | --------- | ------------------------ | ------- |----------  | ----------------- | ----------------- |
-| 0 (Auto-Tier) |           | Intelligent-Tiering      |         | Smart Tier |
-| 0 days        | STANDARD  | Standard                 | hot     | Standard   | Standard          | Standard          |
-| 30 days       | NEARLINE  | Standard-IA, One Zone-IA | cool    | Vault      | Infrequent Access | Infrequent Access |
-| 60 days       |           |                          |         |            |                   | Archive           |
-| 90 days       | COLDLINE  | Glacier                  |         | Cold Vault | Archive           | |
-| 180 days      |           | Glacier Deep Archive     | archive |            |                   | Cold Archive |
-| 365 days      | ARCHIVE   |                          |         |            |                   | |
+The properties `title` and `description` as defined in Common Metadata should be used as well.
+
+#### platform
+
+The `platform` field identifies the cloud provider where the data is stored as URI or URI template to the API of the service.
+
+If a URI template is provided, all variables must be defined in the Storage Scheme Object as a property with the same name.
+For example, the URI template `https://{bucket}.{region}.example.com` must have at least the properties
+`bucket` and `region` defined:
+
+```json
+{
+  "type": "example",
+  "platform": "https://{bucket}.{region}.example.com",
+  "region": "eu-fr",
+  "bucket": "john-doe-stac",
+  "requester_pays": true
+}
+```
+
+In case an `href` contains a non-HTTP URL that is not directly resolvable,
+the `platform` property must identify the host so that the URL can be resolved without further information.
+For example, this is especially useful to provide the endpoint URL for custom S3 providers.
+In this case the `platform` could effectively provide the endpoint URL.
+
+#### type
+
+We try to collect pre-defined templates and best pratices for as many providers as possible
+in this repository, but be aware that these are not part of the official extension releases.
+This extension just provides the framework, the provider best pratices
+may change at any time without a new version of this extension being released.
+
+The following providers have defined best pratices at this point:
+
+| `type`      | Provider and Documentation |
+| ----------- | -------------------------- |
+| `aws-s3`    | [AWS S3](platforms/aws-s3.md) |
+| `custom-s3` | [Generic S3 (non-AWS)](platforms/custom-s3.md) |
+| `ms-azure`  | [Microsoft Azure](platforms/ms-azure.md) |
+
+Feel encouraged to submit additional platform specifications via Pull Requests.
+
+The `type` fields can be any value chosen by the implementor,
+but the types defined in the table above should be used as defined in the best practices.
+This ensures proper schema validation.
 
 ## Contributing
 
-All contributions are subject to the
-[STAC Specification Code of Conduct](https://github.com/radiantearth/stac-spec/blob/master/CODE_OF_CONDUCT.md).
-For contributions, please follow the
-[STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md) Instructions
-for running tests are copied here for convenience.
-
-### Running tests
-
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
-To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
-
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
-your command line run:
-```bash
-npm install
-```
-
-Then to check markdown formatting and test the examples against the JSON schema, you can run:
-```bash
-npm test
-```
-
-This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
-
-If the tests reveal formatting problems with the examples, you can fix them with:
-```bash
-npm run format-examples
-```
+See the [Contributor documentation](CONTRIBUTING.md) for details.
