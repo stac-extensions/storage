@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `storage:platform`, `storage:region`, `storage:requester_pays` and `storage:tier`
+  (moved to Storage Scheme Object, except for the tier)
 
 ## [v1.0.0] - 2021-06-23
 

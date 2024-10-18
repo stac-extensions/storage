@@ -1,4 +1,4 @@
-# S3 (non-AWS)
+# Generic S3 (non-AWS)
 
 This defines the S3 interface for providers other than AWS (e.g. minio-based).
 
