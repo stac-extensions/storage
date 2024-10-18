@@ -43,21 +43,23 @@
   "properties": {
     "datetime": "2016-09-28T00:00:00+00:00",
     "mission": "NAIP",
-    "platform": "UNKNOWN_PLATFORM",
     "gsd": 1,
     "storage:schemes": {
       "az-wus2-ar": {
+        "type": "ms-azure",
         "platform": "https://{account}.blob.core.windows.net",
         "account": "jon-doe-123",
         "region": "westus2"
       },
       "aws-std": {
+        "type": "aws-s3",
         "platform": "https://{bucket}.s3.{region}.amazonaws.com",
         "bucket": "naip-visualization",
         "region": "us-west-2",
         "requester_pays": true
       },
       "minio": {
+        "type": "custom-s3",
         "platform": "https://play.min.io:9000"
       }
     }

@@ -5,7 +5,7 @@
 - **Field Name Prefix:** storage
 - **Scope:** Item, Catalog, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
-- **Owner**: @davidraleigh @matthewhanson
+- **Owner**: @matthewhanson @m-mohr
 
 This document explains the Storage Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 It allows adding details related to cloud object storage access and costs to be associated with STAC Assets.
@@ -53,6 +53,7 @@ The fields in the table below can be used in these parts of STAC documents:
 
 | Field Name     | Type    | Description |
 | -------------- | ------- | ----------- |
+| type           | string  | **REQUIRED.** Type identifier for the platform, see below. |
 | platform       | string  | **REQUIRED.** The cloud provider where data is stored as URI or URI template to the API. |
 | region         | string  | The region where the data is stored. Relevant to speed of access and inter region egress costs (as defined by PaaS provider). |
 | requester_pays | boolean | Is the data "requester pays" (`true`) or is it "data manager/cloud provider pays" (`false`). Defaults to `false`. |
@@ -65,11 +66,12 @@ The properties `title` and `description` as defined in Common Metadata should be
 The `platform` field identifies the cloud provider where the data is stored as URI or URI template to the API of the service.
 
 If a URI template is provided, all variables must be defined in the Storage Scheme Object as a property with the same name.
-For example, the URI template `https://{bucket}.{region}.example.com` must have at least the properties 
+For example, the URI template `https://{bucket}.{region}.example.com` must have at least the properties
 `bucket` and `region` defined:
 
 ```json
 {
+  "type": "example",
   "platform": "https://{bucket}.{region}.example.com",
   "region": "eu-fr",
   "bucket": "john-doe-stac",
@@ -82,18 +84,26 @@ the `platform` property must identify the host so that the URL can be resolved w
 For example, this is especially useful to provide the endpoint URL for custom S3 providers.
 In this case the `platform` could effectively provide the endpoint URL.
 
+#### type
+
 We try to collect pre-defined templates and best pratices for as many providers as possible
-in this repository, but be aware that these are not part of the official extension releases
-and are not validated. This extension just provides the framework, the provider best pratices
+in this repository, but be aware that these are not part of the official extension releases.
+This extension just provides the framework, the provider best pratices
 may change at any time without a new version of this extension being released.
 
 The following providers have defined best pratices at this point:
 
-- [AWS S3](platforms/aws-s3.md)
-- [Generic S3 (non-AWS)](platforms/custom-s3.md)
-- [Microsoft Azure](platforms/ms-azure.md)
+| `type`      | Provider and Documentation |
+| ----------- | -------------------------- |
+| `aws-s3`    | [AWS S3](platforms/aws-s3.md) |
+| `custom-s3` | [Generic S3 (non-AWS)](platforms/custom-s3.md) |
+| `ms-azure`  | [Microsoft Azure](platforms/ms-azure.md) |
 
 Feel encouraged to submit additional platform specifications via Pull Requests.
+
+The `type` fields can be any value chosen by the implementor,
+but the types defined in the table above should be used as defined in the best practices.
+This ensures proper schema validation.
 
 ## Contributing
 

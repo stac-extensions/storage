@@ -96,9 +96,14 @@
           "patternProperties": {
             "^.{1,}$": {
               "required": [
+                "type",
                 "platform"
               ],
               "properties": {
+                "type": {
+                  "title": "Type identifier",
+                  "type": "string"
+                },
                 "platform": {
                   "title": "Platform",
                   "type": "string",
@@ -115,6 +120,17 @@
                   "default": false
                 }
               },
+              "allOf": [
+                {
+                  "$ref": "./platforms/aws-s3.json"
+                },
+                {
+                  "$ref": "./platforms/custom-s3.json"
+                },
+                {
+                  "$ref": "./platforms/ms-azure.json"
+                }
+              ],
               "additionalProperties": true
             }
           },

@@ -1,0 +1,8 @@
+{
+  "schemaMap": {
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json": "./json-schema/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/platforms/aws-s3.json": "./json-schema/platforms/aws-s3.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/platforms/custom-s3.json": "./json-schema/platforms/custom-s3.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/platforms/ms-azure.json": "./json-schema/platforms/ms-azure.json"
+  }
+}
