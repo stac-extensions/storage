@@ -14,7 +14,8 @@ GDAL documentation: <https://gdal.org/en/latest/user/virtual_file_systems.html#v
 
 - `platform`: Some options for S3 can be inferred from the given URL (template):
   - `AWS_HTTPS` can be retrieved by parsing the scheme part of the URL. `https` = `ON`, `http` = `OFF`.
-  - `AWS_S3_ENDPOINT` is the authority part of the URL after replacing all variables in the URL, e.g. `us-west.mycloud.com` without `https://` or `s3://` as prefix.
+  - `AWS_S3_ENDPOINT` is the authority part of the URL after replacing all variables in the URL,
+     e.g. `us-west.mycloud.com` without `https://` or `s3://` as prefix.
   - `AWS_VIRTUAL_HOSTING` must be set to `FALSE` if there's no `{bucket}` placeholder in the URL template, otherwise `TRUE` (default value).
 - The `region` property corresponds to the `AWS_REGION` option.
 - The `requester_pays` property corresponds to the `AWS_REQUEST_PAYER` option. If `requester_pays` is `true`, set `AWS_REQUEST_PAYER` to `requester`.
