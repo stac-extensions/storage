@@ -7,5 +7,5 @@ This defines the Amazon Web Services (AWS) S3 interface.
 - `bucket`: The bucket name.
 - `region`: One of the S3 regions (lowercase).
 
-**Note:** If `s3` exists in `auth:refs`, you should use sign requests,
+**Note:** If the `s3` authentication scheme (i.e. "Simple S3 authentication") is referred to through `auth:refs`, you should disable signing requests,
 e.g. using the AWS CLI parameter `--no-sign-request`.
