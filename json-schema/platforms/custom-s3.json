@@ -11,6 +11,11 @@
     }
   },
   "then": {
-    "$comment": "No specific validation rules apply"
+    "bucket": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    }
   }
 }
