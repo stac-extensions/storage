@@ -34,7 +34,7 @@ AWS CLI documentation: <https://awscli.amazonaws.com/v2/documentation/api/latest
 
 s3cmd documentation: <https://s3tools.org/usage>
 
-- `platform` corresponds to `--host` / `--host-bucket` after replacing all variables in the URL (?).
+- `platform` corresponds to `--host` after replacing all variables in the URL.
 - `region` corresponds to `--region`.
 - `requester_pays` corresponds to `--requester-pays`.
 - If the `s3` authentication scheme (i.e. "Simple S3 authentication") is referred to through `auth:refs`,
