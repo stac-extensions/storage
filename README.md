@@ -15,7 +15,7 @@ This extension does not cover NFS solutions provided by PaaS cloud companies.
   - [NAIP Item with Alternate Assets](examples/item-naip.json): Shows a mixture of storage providers, including custom S3 hosts
     and the [alternate assets extension](https://github.com/stac-extensions/alternate-assets).
   - [Catalog with Link](examples/catalog-link.json): Shows the usage of the extension on a link in a STAC Catalog.
-  - [Collection with Auth](examples/catalog-link.json): Shows the usage of the extension in a STAC Collecion in combination with the
+  - [Collection with Auth](examples/collection.json): Shows the usage of the extension in a STAC Collecion in combination with the
     [authentication extension](https://github.com/stac-extensions/authentication).
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
