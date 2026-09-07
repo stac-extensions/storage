@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `storage_class` property to discriminate the pricing model and access latency.
+- `lifecycle` and related Scheme Object to describe Storage Lifecycle policies.
+
 ### Changed
 
 ### Deprecated

@@ -23,6 +23,18 @@
       "region": {
         "type": "string",
         "pattern": "^[a-z0-9-]+$"
+      },
+      "storage_class": {
+        "type": "string",
+        "enum": [
+          "STANDARD",
+          "STANDARD_IA",
+          "ONEZONE_IA",
+          "INTELLIGENT_TIERING",
+          "GLACIER_IR",
+          "GLACIER",
+          "DEEP_ARCHIVE"
+        ]
       }
     }
   }

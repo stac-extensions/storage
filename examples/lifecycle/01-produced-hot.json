@@ -1,0 +1,76 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "processing-result-123",
+  "geometry": null,
+  "properties": {
+    "datetime": "2026-09-03T10:00:00Z",
+    "created": "2026-09-03T10:00:00Z",
+    "updated": "2026-09-03T10:00:00Z",
+    "published": "2026-09-03T10:00:00Z",
+    "expires": "2026-10-03T10:00:00Z",
+    "storage:schemes": {
+      "hot": {
+        "type": "aws-s3",
+        "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+        "bucket": "processing-results",
+        "region": "eu-central-1",
+        "storage_class": "STANDARD",
+        "lifecycle": {
+          "managed_by": "application",
+          "rules": {
+            "archive": {
+              "trigger": {
+                "type": "age",
+                "from": "/properties/updated",
+                "after": "P30D"
+              },
+              "action": {
+                "type": "transition",
+                "target": "cold"
+              }
+            }
+          }
+        }
+      },
+      "cold": {
+        "type": "aws-s3",
+        "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+        "bucket": "processing-results",
+        "region": "eu-central-1",
+        "storage_class": "DEEP_ARCHIVE",
+        "lifecycle": {
+          "managed_by": "application",
+          "rules": {
+            "expire": {
+              "trigger": {
+                "type": "datetime",
+                "at": "/properties/expires"
+              },
+              "action": { "type": "expire" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "assets": {
+    "result": {
+      "href": "s3://processing-results/processing-result-123/result.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "published": "2026-09-03T10:00:00Z",
+      "expires": "2026-09-10T10:00:00Z",
+      "roles": [
+        "data"
+      ],
+      "storage:refs": [
+        "hot"
+      ]
+    }
+  },
+  "links": []
+}

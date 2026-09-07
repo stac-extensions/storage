@@ -83,7 +83,7 @@
         }
       ]
     }
-  ],  
+  ],
   "definitions": {
     "schemes_field": {
       "type": "object",
@@ -95,6 +95,7 @@
           "type": "object",
           "patternProperties": {
             "^.{1,}$": {
+              "type": "object",
               "required": [
                 "type",
                 "platform"
@@ -114,10 +115,17 @@
                   "title": "Region",
                   "type": "string"
                 },
+                "storage_class": {
+                  "title": "Storage Class",
+                  "type": "string"
+                },
                 "requester_pays": {
                   "type": "boolean",
                   "title": "Requester pays",
                   "default": false
+                },
+                "lifecycle": {
+                  "$ref": "#/definitions/lifecycle"
                 }
               },
               "allOf": [
@@ -139,6 +147,158 @@
       },
       "patternProperties": {
         "^(?!storage:)": {}
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "title": "Storage Lifecycle Object",
+      "description": "Provider-neutral lifecycle rules whose source is the containing Storage Scheme Object.",
+      "type": "object",
+      "required": [
+        "rules"
+      ],
+      "properties": {
+        "managed_by": {
+          "title": "Lifecycle manager",
+          "description": "The entity expected to evaluate and execute the lifecycle rules.",
+          "type": "string",
+          "enum": [
+            "provider",
+            "application"
+          ]
+        },
+        "rules": {
+          "title": "Lifecycle rules",
+          "type": "object",
+          "minProperties": 1,
+          "patternProperties": {
+              "^.{1,}$": {
+              "$ref": "#/definitions/lifecycle_rule"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle_rule": {
+      "title": "Storage Lifecycle Rule Object",
+      "type": "object",
+      "required": [
+        "trigger",
+        "action"
+      ],
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/lifecycle_trigger"
+        },
+        "action": {
+          "$ref": "#/definitions/lifecycle_action"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle_trigger": {
+      "title": "Storage Lifecycle Trigger Object",
+      "description": "The condition that makes a lifecycle action eligible.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/datetime_trigger"
+        },
+        {
+          "$ref": "#/definitions/age_trigger"
+        }
+      ]
+    },
+    "datetime_trigger": {
+      "title": "Datetime Trigger Object",
+      "type": "object",
+      "required": [
+        "type",
+        "at"
+      ],
+      "properties": {
+        "type": {
+          "const": "datetime"
+        },
+        "at": {
+          "title": "Datetime pointer",
+          "description": "An RFC 6901 JSON Pointer, resolved against the STAC object containing storage:schemes, that identifies an RFC 3339 timestamp.",
+          "type": "string",
+          "format": "json-pointer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "age_trigger": {
+      "title": "Age Trigger Object",
+      "type": "object",
+      "required": [
+        "type",
+        "from",
+        "after"
+      ],
+      "properties": {
+        "type": {
+          "const": "age"
+        },
+        "from": {
+          "title": "Reference datetime pointer",
+          "description": "An RFC 6901 JSON Pointer, resolved against the STAC object containing storage:schemes, that identifies an RFC 3339 timestamp.",
+          "type": "string",
+          "format": "json-pointer"
+        },
+        "after": {
+          "title": "Elapsed duration",
+          "description": "A positive ISO 8601 duration after the reference datetime.",
+          "type": "string",
+          "pattern": "^P(?=.+)(?=.*[1-9])(?:\\d+(?:\\.\\d+)?Y)?(?:\\d+(?:\\.\\d+)?M)?(?:\\d+(?:\\.\\d+)?W)?(?:\\d+(?:\\.\\d+)?D)?(?:T(?=.+)(?:\\d+(?:\\.\\d+)?H)?(?:\\d+(?:\\.\\d+)?M)?(?:\\d+(?:\\.\\d+)?S)?)?$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle_action": {
+      "title": "Storage Lifecycle Action Object",
+      "description": "The action performed when a lifecycle trigger becomes eligible.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/transition_action"
+        },
+        {
+          "$ref": "#/definitions/expire_action"
+        }
+      ]
+    },
+    "transition_action": {
+      "title": "Transition Action Object",
+      "type": "object",
+      "required": [
+        "type",
+        "target"
+      ],
+      "properties": {
+        "type": {
+          "const": "transition"
+        },
+        "target": {
+          "title": "Target storage scheme",
+          "description": "The key of the target Storage Scheme Object in the same storage:schemes map.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "expire_action": {
+      "title": "Expire Action Object",
+      "description": "Expires the stored object; this does not require deletion of the containing STAC entity.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "expire"
+        }
       },
       "additionalProperties": false
     },

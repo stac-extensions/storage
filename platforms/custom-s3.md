@@ -4,7 +4,28 @@ This defines the S3 interface for providers other than AWS (e.g. minio-based).
 
 - `platform`: The API URL (template), must be the endpoint URL that can be used for the AWS CLI for example, e.g. `https://{bucket}.example.com` or `http://example.com:9000`.
 - `bucket`: The bucket name, if applicable.
-- `region`: The region, if applicable.
+- `region`: The region, if applicable;
+- `storage_class`: An opaque provider-defined storage-class identifier, if the
+  provider exposes storage classes.
+
+## Lifecycle crosswalk
+
+`custom-s3` guarantees an S3-compatible data-access interface; it does not imply
+support for the complete AWS S3 management API or identical lifecycle semantics.
+
+| Generic construct | Mapping |
+| --- | --- |
+| `managed_by: application` | Use the endpoint's documented object, copy, restore, tier, and delete operations. |
+| `managed_by: provider` | Allowed only when the endpoint explicitly documents compatible lifecycle-policy operations. |
+| `datetime` trigger | Provider-specific; application-managed by default. |
+| `age` trigger | Use the [`aws-s3` mapping](aws-s3.md) only when the provider explicitly guarantees the same clock, unit, filtering, and execution semantics. |
+| `transition` action | Use `storage_class` as the provider-defined target class when the provider supports it; otherwise use an application-managed copy or move. |
+| `expire` action | Provider lifecycle deletion only when explicitly supported; otherwise application-managed deletion. |
+
+An implementation must use capability discovery or provider documentation; it
+must not infer lifecycle support from `type: custom-s3` alone. Unknown
+`storage_class` values are intentionally accepted because they are owned by the
+custom provider.
 
 ## Mapping to S3 tooling
 

@@ -17,6 +17,15 @@
       },
       "account": {
         "type": "string"
+      },
+      "storage_class": {
+        "type": "string",
+        "enum": [
+          "Hot",
+          "Cool",
+          "Cold",
+          "Archive"
+        ]
       }
     }
   }
